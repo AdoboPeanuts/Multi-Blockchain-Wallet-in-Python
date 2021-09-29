@@ -34,6 +34,116 @@ The following dependencies are required for this assignment;
 
 `php hd-wallet-derive.php -g --mnemonic="mnemonic phrase of your test wallet" --cols=path,address,privkey,pubkey`
 
-8. The output will be several addresses corresponding privkey and pubkey
+8. The output will be several address with corresponding privkey and pubkey
 
 ![setup](images/hd-wallet4.png)
+
+## Constants
+______
+
+1. In a separate file, [constants.py](unit19/constants.py), set the following constants:
+
+`BTC = 'btc'`
+`ETH = 'eth'`
+`BTCTEST = 'btc-test'`
+
+2. In wallet.py, import all constants: from constants import *
+
+3. Use these anytime you reference these strings, both in function calls, and in setting object keys.
+
+## Generate a Mnemonic phrase
+
+1. Generate a new 12 word mnemonic using hd-wallet-derive or by [using this tool](tools/bip39-standalone.html).
+
+2. Set this mnemonic as an environment variable by storing it a an .env file and importing it into your [wallet.ipynb](unit19/wallet.ipynb).
+
+## Derive the wallet Keys
+
+1. Create a function called derive_wallets that does the following:
+
+
+2. Use the subprocess library to create a shell command that calls the ./derive script from Python. Make sure to properly wait for the process. Windows Users may need to prepend the php command in front of ./derive like so: php ./derive.
+
+
+3. The following flags must be passed into the shell command as variables:
+
+   * `Mnemonic (--mnemonic) must be set from an environment variable, or default to a test mnemonic`
+   * ` Coin (--coin)`
+    * `Numderive (--numderive) to set number of child keys generated`
+    * `Format (--format=json) to parse the output into a JSON object using json.loads(output)`
+
+4. Create a dictionary object called `coins` that uses the derive_wallets function to derive `ETH` and `BTCTEST` wallets.
+
+5. When done properly, the final object should look something like this (there are only 3 children each in this image):
+
+![setup](images/derive-wallet.png)
+
+## Linking the transaction signing libraries to
+
+1. Use bit and web3.py to leverage the keys stored in the coins object by creating three more functions:
+
+
+* priv_key_to_account:
+    * This function will convert the privkey string in a child key to an account object that bit or web3.py can use to transact.
+
+* This function needs the following parameters:
+    * coin -- the coin type (defined in constants.py).
+    
+    * priv_key -- the privkey string will be passed through here.
+
+* You will need to check the coin type, then return one of the following functions based on the library:
+    * For ETH, return Account.privateKeyToAccount(priv_key)
+        * This function returns an account object from the private key string. You can read more about this object here.
+    * For BTCTEST, return PrivateKeyTestnet(priv_key)
+        * This is a function from the bit libarary that converts the private key string into a WIF (Wallet Import Format) object. WIF is a special format bitcoin uses to designate the types of keys it generates.
+        * You can read more about this function here.
+
+* create_tx:
+
+    * This function will create the raw, unsigned transaction that contains all metadata needed to transact.
+    * This function needs the following parameters:
+       * coin -- the coin type (defined in constants.py.)
+
+       * account -- the account object from priv_key_to_account.
+
+       * to -- the recipient address.
+
+       * amount -- the amount of the coin to send.
+
+
+* You will need to check the coin type, then return one of the following functions based on the library:
+
+    * For ETH, return an object containing to, from, value, gas, gasPrice, nonce, and chainID.Make sure to calculate all of these values properly using web3.
+    * For BTCTEST, return PrivateKeyTestnet.prepare_transaction(account.address, [(to, amount, BTC)])
+
+* send_tx:
+
+
+    * This function will call create_tx, sign the transaction, then send it to the designated network.
+
+    * This function needs the following parameters:
+
+      *  coin -- the coin type (defined in constants.py).
+
+      *  account -- the account object from priv_key_to_account.
+
+      *  to -- the recipient address.
+
+      *  amount -- the amount of the coin to send.
+
+
+    * You may notice these are the exact same parameters as create_tx. send_tx will call create_tx, so it needs all of this information available.
+
+
+    * You will need to check the coin, then create a raw_tx object by calling create_tx. Then, you will need to sign the raw_tx using bit or web3.py (hint: the account objects have a sign transaction function within).
+
+    * Once you've signed the transaction, you will need to send it to the designated blockchain network.
+
+        * For ETH, return w3.eth.sendRawTransaction(signed.rawTransaction)
+
+        * For BTCTEST, return NetworkAPI.broadcast_tx_testnet(signed)
+
+## Sending Transactions and
+
+1. Make sure to fund the wallets using testnet faucets
+
