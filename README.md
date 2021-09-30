@@ -74,7 +74,7 @@ ______
 
 4. Create a dictionary object called `coins` that uses the derive_wallets function to derive `ETH` and `BTCTEST` wallets.
 
-5. When done properly, the final object should look something like this (there are only 3 children each in this image):
+5. When done properly, the final output will look similar to this with each coin generating three accounts:
 
 ![setup](images/derive-wallet.png)
 
@@ -143,7 +143,26 @@ ______
 
         * For BTCTEST, return NetworkAPI.broadcast_tx_testnet(signed)
 
-## Sending Transactions and
+## Sending Transactions
 
 1. Make sure to fund the wallets using testnet faucets
 
+    BTC-TEST
+
+    * https://testnet-faucet.mempool.co
+    * https://coinfaucet.eu/btc-testnet
+    * https://tbtc.bitaps.com
+    * http://kuttler.eu/bitcoin/btc/faucet/
+    * http://bitcoinfaucet.uo1.net/
+
+    ETH
+
+    * https://faucet.ropsten.be
+
+2. Open up a new gitbash terminal window inside of `unit19`.
+
+3. Run the command `python` to open the Python shell
+
+4. Within the Python shell, run the command `from unit19 import *` This will allow you to access the functions inside wallet.py. 
+
+5. You will need to set the account with the `priv_ket_to_account` and use `send_tx` to send transactions.
