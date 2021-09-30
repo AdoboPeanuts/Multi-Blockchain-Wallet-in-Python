@@ -1,16 +1,20 @@
 # Unit 19: Multi Blockchain Wallet in Python by John Mangahas
-
-## Dependencies
 ----
+## Dependencies
 
 The following dependencies are required for this assignment;
 
 1. HD Wallet Derive
 2. `bit` Python Bitcoin Library
 2. `web3.py` Python Ethereum Library
-
-## Project Setup
 ----
+## Notebooks
+
+## [wallet.ipynb](unit19/wallet.ipynb)
+
+## [wallet.py](unit19/wallet,py)
+----
+## Project Setup
 
 1. Create a project directory called `unit19` and `cd` into it using gitbash (Run as Administrator).
 
@@ -38,6 +42,8 @@ The following dependencies are required for this assignment;
 
 ![setup](images/hd-wallet4.png)
 
+---
+
 ## Directory struture
 
 * Disclaimer: I am not able to upload the hd-wallet-derive on github but your directory should look like this.
@@ -46,8 +52,9 @@ The following dependencies are required for this assignment;
 
 ![setup](images/directory2.png)
 
+---
+
 ## Constants
-______
 
 1. In a separate file, [constants.py](unit19/constants.py), set the following constants:
 
@@ -59,12 +66,15 @@ ______
 
 3. Use these anytime you reference these strings, both in function calls, and in setting object keys.
 
+----
+
 ## Generate a Mnemonic phrase
 
 1. Generate a new 12 word mnemonic using hd-wallet-derive or by [using this tool](tools/bip39-standalone.html).
 
 2. Set this mnemonic as an environment variable by storing it a an .env file and importing it into your [wallet.ipynb](unit19/wallet.ipynb).
 
+----
 ## Derive the wallet Keys
 
 1. Create a function called derive_wallets that does the following:
@@ -85,6 +95,8 @@ ______
 5. When done properly, the final output will look similar to this with each coin generating three accounts:
 
 ![setup](images/derive-wallet.png)
+
+---
 
 ## Linking the transaction signing libraries to
 
@@ -151,6 +163,7 @@ ______
 
         * For BTCTEST, return NetworkAPI.broadcast_tx_testnet(signed)
 
+---
 ## Sending Transactions
 
 1. Make sure to fund the wallets using testnet faucets
