@@ -8,11 +8,10 @@ The following dependencies are required for this assignment;
 2. `bit` Python Bitcoin Library
 2. `web3.py` Python Ethereum Library
 ----
-## Notebooks
+## Notebook
 
 ## [wallet.ipynb](unit19/wallet.ipynb)
 
-## [wallet.py](unit19/wallet,py)
 ----
 ## Project Setup
 
