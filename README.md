@@ -38,6 +38,14 @@ The following dependencies are required for this assignment;
 
 ![setup](images/hd-wallet4.png)
 
+## Directory struture
+
+* Disclaimer: I am not able to upload the hd-wallet-derive on github but your directory should look like this.
+
+![setup](images/directory.png)
+
+![setup](images/directory2.png)
+
 ## Constants
 ______
 
@@ -194,7 +202,18 @@ ______
 
     !![setup](images/eth-privkey.png)
 
+    !![setup](images/eth-privkey2.png)
+
+    !![setup](images/eth-privkey3.png)
+
     * Send a transaction from the pre-funded address within the wallet to another, then copy the txid into MyCrypto's TX Status, and screenshot the successful transaction like so:
 
+    !![setup](images/send-eth1.png)
+
+    !![setup](images/send-eth2.png)
+
+    !![setup](images/send-eth3.png)
+
+    !![setup](images/send-eth4.png)
     
     
